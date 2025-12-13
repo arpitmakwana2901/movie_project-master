@@ -24,8 +24,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://movie-project-six-tan.vercel.app",
-      "https://movie-project-master-z36x.vercel.app",
+      "https://movie-project-master-8xnr.vercel.app",
     ],
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
