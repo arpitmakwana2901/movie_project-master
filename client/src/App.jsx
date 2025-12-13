@@ -20,7 +20,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import UserMovies from "./components/UserMovie";
 import Payment from "./pages/payment";
 
-export const API_URL = "https://movie-project-l80a.onrender.com";
+export const API_URL = "https://movie-project-master-backend.onrender.com";
 
 const App = () => {
   const isAdminRoute = useLocation().pathname.startsWith("/admin");
