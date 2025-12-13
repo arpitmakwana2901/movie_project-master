@@ -19,11 +19,13 @@ const successPay = require("./routes/successPayRoute");
 const app = express();
 require("dotenv").config();
 
+// CORS: add your frontend URLs here (must match the browser origin exactly)
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
       "https://movie-project-six-tan.vercel.app",
+      "https://movie-project-master-z36x.vercel.app",
     ],
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
