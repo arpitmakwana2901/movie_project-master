@@ -18,7 +18,7 @@ import AddShows from "./pages/admin/AddShows";
 import AuthPage from "./pages/AuthPage";
 import PrivateRoute from "./components/PrivateRoute";
 import UserMovies from "./components/UserMovie";
-import Payment from "./pages/payment";
+import Payment from "./components/Payment";
 
 export const API_URL = "https://movie-project-l80a.onrender.com";
 
