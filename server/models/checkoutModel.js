@@ -1,66 +1,73 @@
 const mongoose = require("mongoose");
 
-const checkoutSchema = mongoose.Schema(
+const checkoutSchema = new mongoose.Schema(
   {
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
     movieId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
-    // ✅ ADD THESE REQUIRED FIELDS
     movieTitle: {
       type: String,
-      default: "Unknown Movie", // ✅ Default value add karo
+      required: true,
+      default: "Unknown Movie",
     },
-    poster_path: {
-      type: String,
-      default: "/default-poster.jpg", // ✅ Default value
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
     },
-    runtime: {
-      type: Number,
-      default: 120, // ✅ Default value
+    seats: {
+      type: [String],
+      required: true,
+      default: ["A1"],
     },
-    time: {
-      type: String,
-      default: "Not specified", // ✅ Default value
-    },
-    seats: [
-      {
-        type: String,
-        default: [], // ✅ Default empty array
-      },
-    ],
     totalAmount: {
       type: Number,
-      default: 0, // ✅ Default value
+      required: true,
+      default: 0,
+      min: 0,
+    },
+    theaterName: {
+      type: String,
+      required: true,
+      default: "Unknown Theater",
+    },
+    showTime: {
+      type: Date,
+      required: true,
+      default: Date.now,
+    },
+    screen: {
+      type: String,
+      default: "Screen 1",
     },
     isPaid: {
       type: Boolean,
-      default: false, // ✅ Default value
-    },
-    // ✅ Existing fields
-    selectedDate: {
-      type: Date,
-      required: true,
-    },
-    status: {
-      type: String,
-      default: "pending",
+      default: false,
     },
     paymentDate: {
       type: Date,
     },
     paymentId: {
       type: String,
-      default: null,
+    },
+    orderId: {
+      type: String,
+    },
+    paymentStatus: {
+      type: String,
+      enum: ["pending", "completed", "failed", "refunded"],
+      default: "pending",
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    strict: false, // Allow additional fields
+  }
 );
 
-const CheckoutModel = mongoose.model("checkout", checkoutSchema);
+// Remove any unique constraints that might cause issues
+checkoutSchema.index({ paymentId: 1 });
+
+const CheckoutModel = mongoose.model("Checkout", checkoutSchema);
+
 module.exports = CheckoutModel;

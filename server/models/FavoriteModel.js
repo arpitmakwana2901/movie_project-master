@@ -4,7 +4,7 @@ const favoriteSchema = new mongoose.Schema(
     movieId: {
       type: String,
       required: true,
-      unique: true, // same movie duplicate add nahi hogi
+      unique: true, 
     },
     title: {
       type: String,

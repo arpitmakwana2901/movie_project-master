@@ -2,11 +2,6 @@ const mongoose = require("mongoose");
 
 const successPaySchema = mongoose.Schema(
   {
-    bookingId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "seat-booking", // 👈 EXACT model name
-      required: true,
-    },
     movieId: {
       type: mongoose.Schema.Types.ObjectId, // 👈 EXACT model name
       ref: "Show",

@@ -7,10 +7,10 @@ const successPay = express.Router();
 
 successPay.post("/pay", authenticate, async (req, res) => {
   try {
-    const { bookingId, movieId, amount } = req.body;
+    const { movieId, amount } = req.body;
 
     // 🔎 FIND BOOKING
-    const booking = await BookingModel.findById(bookingId);
+    const booking = await BookingModel.findById(movieId);
 
     if (!booking) {
       return res.status(404).json({
