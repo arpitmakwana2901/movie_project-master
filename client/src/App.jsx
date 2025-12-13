@@ -55,7 +55,7 @@ const App = () => {
         {/* <Route path="/booknow/:id/:date" element={<BookNow />} /> */}
         <Route path="/booknow/:id" element={<BookNow />} />
         <Route path="/my-movies" element={<UserMovies />} />
-        <Route path="/payment" elemennt={<DonePayment />} />
+        <Route path="/payment" element={<DonePayment />} />
         {/* ✅ New Auth route */}
         <Route path="/auth" element={<AuthPage />} />
 

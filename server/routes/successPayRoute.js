@@ -2,12 +2,14 @@ const express = require("express");
 const successPayModel = require("../models/successPayModel");
 const BookingModel = require("../models/bookingModel");
 const authenticate = require("../middlewere/auth");
+
 const successPay = express.Router();
 
 successPay.post("/pay", authenticate, async (req, res) => {
   try {
-    const { bookingId, amount } = req.body;
+    const { bookingId, movieId, amount } = req.body;
 
+    // 🔎 FIND BOOKING
     const booking = await BookingModel.findById(bookingId);
 
     if (!booking) {
@@ -17,7 +19,7 @@ successPay.post("/pay", authenticate, async (req, res) => {
       });
     }
 
-    // ✅ CHECK FIRST
+    // ❌ ALREADY PAID
     if (booking.isPaid) {
       return res.status(400).json({
         success: false,
@@ -25,14 +27,15 @@ successPay.post("/pay", authenticate, async (req, res) => {
       });
     }
 
-    // ✅ SAVE PAYMENT
+    // ✅ SAVE PAYMENT (MODEL KE HISAAB SE)
     await successPayModel.create({
       bookingId,
+      movieId,
       amount,
       status: "success",
     });
 
-    // ✅ MARK AS PAID
+    // ✅ MARK BOOKING AS PAID
     booking.isPaid = true;
     await booking.save();
 

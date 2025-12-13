@@ -10,7 +10,6 @@ const DonePayment = () => {
   const navigate = useNavigate();
   const booking = state?.booking;
   const authData = useAuth();
-  console.log("AUTH DATA:", authData);
   const token = authData?.token;
   const [loading, setLoading] = useState(false);
 
@@ -25,8 +24,9 @@ const DonePayment = () => {
       const res = await axios.post(
         `${API_URL}/successpayment/pay`,
         {
-          bookingId: booking._id,
-          amount: booking.totalAmount,
+          bookingId: booking._id, // ✅ seat-booking _id
+          movieId: booking.movieId, // ✅ Show _id
+          amount: booking.totalAmount, // ✅ amount
         },
         {
           headers: {
@@ -35,7 +35,6 @@ const DonePayment = () => {
         }
       );
 
-      console.log(res.data);
       if (res.data.success) {
         toast.success("ticket purchased successfully 🎟️");
         navigate("/my-bookings", {
