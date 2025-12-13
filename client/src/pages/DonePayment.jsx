@@ -5,10 +5,9 @@ import { toast } from "react-hot-toast";
 import { API_URL } from "../App";
 import { useAuth } from "../components/context/AuthContext";
 
-const Payment = () => {
+const DonePayment = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
-  // const { token } = useAuth(); // ✅ correct
   const booking = state?.booking;
   const authData = useAuth();
   console.log("AUTH DATA:", authData);
@@ -83,4 +82,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default DonePayment;

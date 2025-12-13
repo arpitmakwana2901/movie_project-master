@@ -18,7 +18,7 @@ import AddShows from "./pages/admin/AddShows";
 import AuthPage from "./pages/AuthPage";
 import PrivateRoute from "./components/PrivateRoute";
 import UserMovies from "./components/UserMovie";
-import Payment from "./components/Payment";
+import DonePayment from "./pages/DonePayment";
 
 export const API_URL = "https://movie-project-master-backend.onrender.com";
 
@@ -55,8 +55,7 @@ const App = () => {
         {/* <Route path="/booknow/:id/:date" element={<BookNow />} /> */}
         <Route path="/booknow/:id" element={<BookNow />} />
         <Route path="/my-movies" element={<UserMovies />} />
-        <Route path="/payment" element={<Payment />} />
-
+        <Route path="/payment" elemennt={<DonePayment />} />
         {/* ✅ New Auth route */}
         <Route path="/auth" element={<AuthPage />} />
 
