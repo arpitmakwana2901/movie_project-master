@@ -1,21 +1,25 @@
 const jwt = require("jsonwebtoken");
 
-const authenticate = async (req, res, next) => {
-  try {
-    const token = req.headers.authorization;
-    if (!token) return res.status(401).json({ message: "Unauthorized" });
-    console.log(token, "TOKEN");
-    // Split "Bearer <token>"
-    const decoded = jwt.verify(token.split(" ")[1], process.env.SECRET_KEY);
-    console.log(decoded, "DECODED");
-    if (!decoded) return res.status(401).json({ message: "Unauthorized" });
+const authenticate = (req, res, next) => {
+  const authHeader = req.headers.authorization;
 
-    req.user = decoded; // attach decoded payload directly
-    console.log("Authenticated user:", req.user);
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "No token provided" });
+  }
+
+  const token = authHeader.split(" ")[1];
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // ✅ ONE SOURCE OF TRUTH
+    req.user = {
+      userId: decoded.id,
+    };
+
     next();
   } catch (error) {
-    console.log("Auth error:", error);
-    return res.status(401).json({ message: error.message });
+    return res.status(401).json({ message: "Invalid token" });
   }
 };
 

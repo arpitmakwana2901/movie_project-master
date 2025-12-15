@@ -15,7 +15,6 @@ const adminSidebarRoute = require("./routes/adminSidebarRoute");
 const dashboardRoute = require("./routes/adminDashboardRoute");
 const favoriteRouter = require("./routes/favoriteRoute");
 const adminListBookingsRoute = require("./routes/adminListBookingsRoute");
-const successPay = require("./routes/successPayRoute");
 const app = express();
 require("dotenv").config();
 
@@ -48,7 +47,7 @@ app.use("/adminSidebar", adminSidebarRoute);
 app.use("/adminDashboard", dashboardRoute);
 app.use("/favorite", favoriteRouter);
 app.use("/admin", adminListBookingsRoute);
-app.use("/successpayment", successPay);
+
 app.listen(process.env.PORT || 3690, (error) => {
   if (error) {
     console.log("Server is not connected", error.message);

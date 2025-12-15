@@ -33,7 +33,7 @@ const HeroSection = () => {
   if (heroes.length === 0)
     return <div className="text-white p-6">Loading...</div>;
 
-  const hero = heroes[currentIndex];
+  const hero = heroes[currentIndex] || {};
 
   const goToPrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? heroes.length - 1 : prev - 1));
@@ -51,9 +51,11 @@ const HeroSection = () => {
     <div className="relative h-screen overflow-hidden">
       <AnimatePresence>
         <motion.div
-          key={hero._id}
+          key={hero?._id || currentIndex}
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${hero.image})` }}
+          style={{
+            backgroundImage: hero?.image ? `url(${hero.image})` : "none",
+          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -64,7 +66,13 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-linear-to-t from-black via-transparent"></div>
 
       <div className="relative z-10 flex flex-col items-start justify-center gap-4 px-6 md:px-16 lg:px-36 h-full text-white">
-        <img src={hero.logo} alt="" className="max-h-10 lg:h-11 mt-20" />
+        {hero?.logo && (
+          <img src={hero.logo} alt="" className="max-h-10 lg:h-11 mt-20" />
+        )}
+
+        <h1 className="text-4xl md:text-[70px] font-semibold">
+          {hero?.title || ""}
+        </h1>
 
         <h1 className="text-4xl md:text-[70px] font-semibold max-w-110 drop-shadow-lg leading-tight">
           {hero.title}

@@ -86,10 +86,7 @@ const AuthPage = () => {
     }
 
     try {
-      const response = await axios.post(
-        `${API_URL}/user/registration`,
-        data
-      );
+      const response = await axios.post(`${API_URL}/user/registration`, data);
 
       showToast(
         "success",
@@ -123,10 +120,10 @@ const AuthPage = () => {
     }
 
     try {
-      const response = await axios.post(
-        `${API_URL}/user/login`,
-        { email: data.email, password: data.password }
-      );
+      const response = await axios.post(`${API_URL}/user/login`, {
+        email: data.email,
+        password: data.password,
+      });
 
       const toastId = toast.success(
         response.data.message || "Welcome back! Redirecting...",
